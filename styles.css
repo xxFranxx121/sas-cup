@@ -137,7 +137,54 @@ nav a:hover {
     grid-template-columns: 1fr 2fr;
     gap: 25px;
 }
+/* --- AJUSTES PARA MÓVIL (Solo pantallas pequeñas) --- */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px;
+    }
 
+    .match-item {
+        padding: 15px 5px !important;
+    }
+
+    /* Cambiamos a diseño vertical SOLO en móvil */
+    .team-info {
+        flex-direction: column !important; 
+        gap: 5px !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+
+    .match-item > .team-info:last-child {
+        flex-direction: column !important; /* En móvil quitamos el row-reverse */
+    }
+
+    .team-info span {
+        white-space: normal !important; /* Permite que el nombre baje de línea */
+        display: block !important;
+        max-width: 85px;
+        line-height: 1.1;
+        font-size: 0.75rem;
+    }
+
+    .team-logo {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .team-vs {
+        margin-top: 10px; /* Alineamos el VS con los escudos */
+    }
+}
+
+/* Ajuste para que el resto de la página (MVP, Stats) se apile en tablet/móvil */
+@media (max-width: 768px) {
+    .container { grid-template-columns: 1fr; }
+    .right-grid { width: 100%; }
+    .stats-row { grid-template-columns: 1fr; }
+    .mvp-card { height: auto; flex-direction: column; }
+    .mvp-content, .mvp-image-container { width: 100%; }
+}
 /* --- TARJETAS GENERALES --- */
 .card {
     background: var(--bg-card);
@@ -170,53 +217,44 @@ nav a:hover {
     font-weight: 700;
 }
 
-/* --- LISTA DE PARTIDOS MEJORADA --- */
+/* --- LISTA DE PARTIDOS (Escritorio) --- */
 .match-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 25px; /* Aumentamos el padding horizontal */
+    padding: 15px 20px;
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .team-info {
     display: flex;
     align-items: center;
-    gap: 12px; /* Espacio entre escudo y nombre */
-    flex: 1; 
+    gap: 12px;
+    flex: 1; /* Esto hace que ambos equipos ocupen el mismo espacio */
     font-weight: 700;
     font-size: 0.85rem;
 }
 
-/* Alineaciones específicas */
+/* Equipo de la izquierda: Escudo a la izquierda, texto a la derecha */
 .match-item > .team-info:first-child {
     justify-content: flex-start;
+    text-align: left;
 }
 
-.match-item > .team-info:first-child span {
-    margin-right: 5px;
-}
-
-.match-item > .team-info:last-child span {
-    margin-left: 5px;
-}
-
+/* Equipo de la derecha: Escudo a la derecha, texto a la izquierda */
 .match-item > .team-info:last-child {
     justify-content: flex-end;
-    flex-direction: row-reverse; /* Escudo siempre al extremo derecho */
+    flex-direction: row-reverse; /* Voltea el orden: Nombre - Escudo */
     text-align: right;
 }
 
 .team-vs {
-    width: 60px; /* Un poco más de ancho */
-    margin: 0 15px; /* Esto crea el "aire" que falta a los lados del VS */
+    width: 40px;
     font-weight: 900;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--sas-red);
-    font-style: italic;
     text-align: center;
     flex-shrink: 0;
-    opacity: 0.8;
 }
 
 /* --- GRID DERECHA --- */
@@ -562,44 +600,26 @@ tr:nth-child(2) td:first-child {
 /* En móvil, las líneas complejas se rompen, así que las ocultamos y simplificamos la vista */
 @media (max-width: 768px) {
     .bracket-wrapper {
-        flex-direction: column;
+        display: flex;
+        flex-direction: column; /* Apilado vertical */
         align-items: center;
-        gap: 40px;
-        padding: 30px 10px;
+        gap: 30px;
     }
+
+    /* Reordenamos para que el Play-in (Naranja) aparezca arriba de la Semi */
+    .bracket-col-right { order: 1; } /* Play-in y su Semi */
+    .bracket-col-left { order: 2; }  /* La otra Semi */
+    .bracket-col-center { order: 3; } /* Final y 3er Puesto */
 
     .bracket-col {
         width: 100%;
-        max-width: 280px;
-        margin-top: 0; /* Reseteamos los márgenes */
-        align-items: center; /* Todo centrado */
+        max-width: 300px;
+        margin-top: 0 !important;
+        align-items: center;
     }
     
-    .round-title { text-align: center; }
-    
-    /* Ocultamos las líneas conectoras complejas en móvil para limpiar la vista */
-    .match-semi-l::after,
-    .match-semi-r::after,
-    .vertical-connector-right {
+    /* Quitamos las líneas laterales en móvil porque no tienen espacio */
+    .match-semi-l::after, .match-semi-r::after {
         display: none;
     }
-
-    /* Añadimos una flechita simple entre rondas en móvil */
-    .bracket-col-left::after, .bracket-col-center::after {
-        content: '↓';
-        color: var(--text-dim);
-        font-size: 1.5rem;
-        margin-top: 20px;
-        display: block;
-        text-align: center;
-    }
-    /* El último no lleva flecha */
-    .bracket-col-right::after { content: none; }
-
-    /* Reordenamos visualmente para que tenga sentido en vertical:
-       Primero Play-in, luego Semis, luego Finales */
-    .bracket-wrapper { display: flex; flex-direction: column; }
-    .bracket-col-right { order: 1; } /* Play-in primero */
-    .bracket-col-left { order: 2; }  /* Semis después */
-    .bracket-col-center { order: 3; } /* Finales al final */
 }
