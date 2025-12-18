@@ -623,3 +623,217 @@ tr:nth-child(2) td:first-child {
         display: none;
     }
 }
+
+
+/* =========================
+   TABLAS DE ESTADÍSTICAS
+========================= */
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.stats-table thead {
+    background: rgba(0,0,0,0.3);
+}
+
+.stats-table th {
+    padding: 14px;
+    text-align: left;
+    font-weight: 900;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--sas-blue);
+}
+
+.stats-table td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--text-light);
+}
+
+.stats-table tbody tr:hover {
+    background: rgba(255,255,255,0.03);
+}
+
+/* Líder destacado */
+.stats-table .leader {
+    background: linear-gradient(
+        to right,
+        rgba(16,185,129,0.15),
+        transparent
+    );
+}
+
+.stats-table .leader td:last-child {
+    font-weight: 900;
+    color: var(--sas-green);
+}
+
+/* Logo dentro de la tabla */
+.table-logo {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+    margin-right: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-table {
+        font-size: 0.75rem;
+    }
+
+    .stats-table th,
+    .stats-table td {
+        padding: 10px 6px;
+    }
+}
+
+
+
+/* =========================
+   FILTROS FECHAS
+========================= */
+.stats-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filter {
+    padding: 8px 18px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.filter.active {
+    background: var(--sas-green);
+    color: #020617;
+}
+
+/* =========================
+   MVP MINI
+========================= */
+.mvp-mini {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s ease;
+}
+
+.mvp-mini img {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.mvp-name {
+    font-size: 1.4rem;
+    font-weight: 900;
+}
+
+.mvp-team {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+}
+
+/* =========================
+   BLOQUES FECHA
+========================= */
+.stats-block {
+    display: none;
+    animation: fadeUp 0.5s ease;
+}
+
+.stats-block.active {
+    display: block;
+}
+
+/* =========================
+   ANIMACIONES
+========================= */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* TOP 3 */
+.gold td { background: rgba(251,191,36,0.15); font-weight: 900; }
+.silver td { background: rgba(148,163,184,0.12); }
+.bronze td { background: rgba(249,115,22,0.12); }
+
+/* Tabla compacta */
+.stats-table.compact th,
+.stats-table.compact td {
+    padding: 10px;
+    font-size: 0.8rem;
+}
+
+
+/* Estilo especial para las tarjetas de equipos */
+.team-card-large {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: linear-gradient(180deg, var(--bg-card) 0%, rgba(15, 23, 42, 0.8) 100%);
+    cursor: pointer;
+}
+
+.team-card-large:hover {
+    transform: translateY(-10px);
+    border-color: var(--sas-blue);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(14, 165, 233, 0.2);
+}
+
+.team-logo-container {
+    width: 180px; /* Tamaño del logo más grande */
+    height: 180px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.team-logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+    border-radius: 50%; /* Opcional: si quieres que el logo sea circular */
+}
+
+.team-info h3 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin: 0;
+    color: var(--text-light);
+    text-transform: uppercase;
+}
+
+.team-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--sas-green);
+    color: #020617;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}

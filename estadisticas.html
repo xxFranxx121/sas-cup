@@ -26,26 +26,171 @@
     </header>
 
 <div class="container" style="grid-template-columns: 1fr;">
-    <div class="stats-row">
-        <div class="card stat-card">
-            <div class="stat-number">12</div>
-            <div class="stat-label">GOLES</div>
-            <div class="player-name">Mateo Vuigner</div>
-        </div>
 
-        <div class="card stat-card">
-            <div class="stat-number">8</div>
-            <div class="stat-label">ASISTENCIAS</div>
-            <div class="player-name">Fran De Cilia</div>
-        </div>
-
-        <div class="card stat-card">
-            <div class="stat-number">4</div>
-            <div class="stat-label">VALLA INVICTA</div>
-            <div class="player-name">Arquero CACN</div>
-        </div>
+    <!-- FILTROS -->
+    <div class="stats-filters">
+        <button class="filter active" data-fecha="total">Total</button>
+        <button class="filter" data-fecha="f1">Fecha 1</button>
+        <button class="filter" data-fecha="f2">Fecha 2</button>
     </div>
+
+    <!-- MVP -->
+    <div class="card mvp-mini" id="mvp">
+        <div>
+            <h3>MVP</h3>
+            <p class="mvp-name">Lucho</p>
+            <span class="mvp-team">CACN FC</span>
+        </div>
+        <img src="imagenes/mvp.jpg" alt="MVP">
+    </div>
+
+    <!-- TABLA GOLES -->
+    <div class="card stats-block active" data-fecha="total">
+        <div class="card-header"><h3>Goleadores</h3></div>
+        <table class="stats-table">
+            <thead>
+                <tr><th>#</th><th>Jugador</th><th>Equipo</th><th>Goles</th></tr>
+            </thead>
+            <tbody>
+                <tr class="gold"><td>1</td><td>Mateo Vuigner</td><td>CACN</td><td>12</td></tr>
+                <tr class="silver"><td>2</td><td>Lucho</td><td>Hermas</td><td>9</td></tr>
+                <tr class="bronze"><td>3</td><td>Juan Pérez</td><td>Llorvi</td><td>7</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- FECHA 1 -->
+    <div class="card stats-block" data-fecha="f1">
+        <div class="card-header"><h3>Goleadores – Fecha 1</h3></div>
+        <table class="stats-table">
+            <tbody>
+                <tr class="gold"><td>1</td><td>Lucho</td><td>CACN</td><td>3</td></tr>
+                <tr><td>2</td><td>Mateo Vuigner</td><td>CACN</td><td>2</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- FECHA 2 -->
+    <div class="card stats-block" data-fecha="f2">
+        <div class="card-header"><h3>Goleadores – Fecha 2</h3></div>
+        <table class="stats-table">
+            <tbody>
+                <tr class="gold"><td>1</td><td>Mateo Vuigner</td><td>CACN</td><td>4</td></tr>
+                <tr><td>2</td><td>Juan Pérez</td><td>Llorvi</td><td>2</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card stats-block active" data-fecha="total">
+    <div class="card-header">
+        <h3>ASISTENCIAS</h3>
+    </div>
+
+    <table class="stats-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Jugador</th>
+                <th>Equipo</th>
+                <th>Asist.</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="gold">
+                <td>1</td>
+                <td>Fran De Cilia</td>
+                <td>CACN</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Lucas Gómez</td>
+                <td>Explosivos</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Juan Pérez</td>
+                <td>Llorvi</td>
+                <td>5</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<div class="card stats-block active" data-fecha="total">
+    <div class="card-header">
+        <h3>ARQUEROS & DISCIPLINA</h3>
+    </div>
+
+    <table class="stats-table compact">
+        <thead>
+            <tr>
+                <th>Jugador</th>
+                <th>Equipo</th>
+                <th>Vallas</th>
+                <th>Amarillas</th>
+                <th>Rojas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="gold">
+                <td>Arquero CACN</td>
+                <td>CACN</td>
+                <td>4</td>
+                <td>1</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Arquero Hermas</td>
+                <td>Hermas</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="card stats-block" data-fecha="f1">
+    <div class="card-header"><h3>Asistencias – Fecha 1</h3></div>
+        <table class="stats-table">
+            <tbody>
+                <tr class="gold"><td>1</td><td>Francisco de Cilia</td><td>CACN</td><td>4</td></tr>
+                <tr><td>2</td><td>Juan Pérez</td><td>Llorvi</td><td>2</td></tr>
+            </tbody>
+        </table>
+    ...
+</div>
+
+
+
+
+</div>
+
+<script>
+const filters = document.querySelectorAll('.filter');
+const blocks = document.querySelectorAll('.stats-block');
+
+filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+
+        filters.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const fecha = btn.dataset.fecha;
+
+        blocks.forEach(block => {
+            block.classList.remove('active');
+            if (block.dataset.fecha === fecha) {
+                block.classList.add('active');
+            }
+        });
+
+    });
+});
+</script>
+
 
 </body>
 </html>
