@@ -43,44 +43,46 @@ header {
 }
 
 .team-strip {
-    background: rgba(255, 255, 255, 0.05); /* Efecto cristal */
+    background: rgba(15, 23, 42, 0.6); /* Más oscuro para contraste */
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 10px 20px;
+    padding: 8px 15px;
     border-radius: 50px;
     display: inline-flex;
-    gap: 15px;
+    gap: 10px;
     margin-bottom: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
 /* Estilo general para todos los escudos de equipo (header y lista de partidos) */
+/* --- AJUSTE PARA LOGOS PNG EN EL HEADER --- */
 .team-logo {
-    width: 40px;  /* Tamaño un poco más grande para que se vea bien */
-    height: 40px;
-    /* Esto es clave para los JPG: los fuerza a ser redondos */
+    width: 60px;          /* Un poco más grandes */
+    height: 60px;
     border-radius: 50%; 
-    /* Esto asegura que si la imagen no es cuadrada, no se deforme al meterla en el círculo */
-    object-fit: cover; 
-    /* Un borde fino para separarlos del fondo oscuro */
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    /* Una sombra suave para dar profundidad */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    /* Fondo blanco para que el PNG transparente resalte */
+    background: none;    
+    /* Padding para que el logo no toque los bordes del círculo */
+    padding: 5px;         
+    /* Cambiamos 'cover' por 'contain' para que no se corte ninguna parte del escudo */
+    object-fit: contain;  
+    border: 2px solid var(--sas-blue); /* Borde con color de la liga */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
 }
 
 /* Ajuste específico para la tira del header */
 .team-strip .team-logo {
-    /* Un poco de margen negativo para que se superpongan ligeramente, queda moderno */
-    margin-right: -10px;
-    border-color: var(--bg-deep); /* Borde del color del fondo para "cortar" al de al lado */
-    transition: transform 0.3s ease, margin 0.3s ease;
+    /* Reducimos el solapamiento para que no se tapen tanto entre sí */
+    margin-right: -5px; 
+    position: relative;
+    cursor: pointer;
 }
 /* Efecto al pasar el mouse sobre los escudos del header */
 .team-strip .team-logo:hover {
-    transform: scale(1.2);
-    margin-right: 10px; /* Separarlo al hacer hover */
+    transform: scale(1.2) translateY(-5px); /* Sube un poquito */
     z-index: 10;
     border-color: var(--sas-green);
+    box-shadow: 0 0 15px var(--sas-green);
 }
 
 /* Estilo para el logo pequeño de la liga en el header de la tarjeta */
@@ -230,28 +232,29 @@ nav a:hover {
     display: flex;
     align-items: center;
     gap: 12px;
-    flex: 1; /* Esto hace que ambos equipos ocupen el mismo espacio */
+    flex: 1; /* Distribuye el espacio equitativamente */
     font-weight: 700;
     font-size: 0.85rem;
 }
 
-/* Equipo de la izquierda: Escudo a la izquierda, texto a la derecha */
+/* Equipo IZQUIERDA: Escudo siempre pegado al borde IZQUIERDO */
 .match-item > .team-info:first-child {
-    justify-content: flex-start;
+    justify-content: flex-start; 
     text-align: left;
 }
 
-/* Equipo de la derecha: Escudo a la derecha, texto a la izquierda */
+/* Equipo DERECHA: Escudo siempre pegado al borde DERECHO */
 .match-item > .team-info:last-child {
-    justify-content: flex-end;
-    flex-direction: row-reverse; /* Voltea el orden: Nombre - Escudo */
+    /* flex-start en row-reverse pega el contenido al inicio del flujo (la derecha) */
+    justify-content: flex-start; 
+    flex-direction: row-reverse; 
     text-align: right;
 }
 
 .team-vs {
-    width: 40px;
+    width: 50px; /* Ancho fijo para que el centro nunca se mueva */
     font-weight: 900;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: var(--sas-red);
     text-align: center;
     flex-shrink: 0;
@@ -836,4 +839,257 @@ tr:nth-child(2) td:first-child {
     text-transform: uppercase;
     border-radius: 4px;
     margin-bottom: 10px;
+}
+
+/* --- ESTILOS ESPECÍFICOS PARA SPONSORS --- */
+.sponsor-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px !important;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.sponsor-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--sas-green);
+}
+
+.sponsor-logo-wrapper {
+    background: none;
+    padding: 10px; /* Menos padding para que el logo crezca */
+    border-radius: 12px;
+    width: 100%;
+    height: 300px; /* Aumentado de 150px a 200px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.sponsor-img {
+    max-width: 100%;  /* Casi todo el ancho disponible */
+    max-height: 100%; /* Casi todo el alto disponible */
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.sponsor-card:hover .sponsor-img {
+    transform: scale(1.08); /* Efecto de zoom suave al pasar el mouse */
+}
+
+
+/* Contenedor de la imagen */
+.awards-banner {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Ajusta según prefieras */
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.main-trophy-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Para que llene el espacio sin deformarse */
+    object-position: center 70%; /* mueve el encuadre hacia arriba */
+    transition: transform 0.5s ease;
+}
+
+.awards-banner:hover .main-trophy-img {
+    transform: scale(1.05); /* Efecto de zoom suave */
+}
+
+/* Degradado para que la imagen se funda con el diseño */
+.overlay-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, var(--bg-card), transparent);
+}
+
+/* Rejilla de textos de premios */
+.awards-description-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.1); /* Líneas divisorias */
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.award-item {
+    background: var(--bg-card);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.award-title {
+    color: #ffd700; /* Dorado */
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.award-subtitle {
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   ESTILOS COMPLETOS DEL MODAL (CORREGIDO)
+   ========================================= */
+
+/* Fondo oscuro que cubre toda la pantalla */
+.modal {
+    display: none; /* Se activa por JS */
+    position: fixed; /* Asegura que flote sobre todo */
+    z-index: 2000; /* Por encima de cualquier otro elemento */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Fondo negro traslúcido */
+    backdrop-filter: blur(8px); /* Efecto de desenfoque al fondo */
+    overflow-y: auto; /* Permite scroll si el contenido es muy largo */
+    padding: 20px 0;
+}
+
+/* Caja blanca/oscura que contiene la info */
+.modal-content {
+    background-color: var(--bg-card);
+    margin: 2% auto; /* Margen superior pequeño y centrado horizontal */
+    width: 90%;
+    max-width: 750px;
+    border-radius: 20px;
+    overflow: hidden; /* Corta lo que sobresalga de los bordes redondeados */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    animation: modalAppear 0.4s ease-out; /* Animación de entrada */
+}
+
+@keyframes modalAppear {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Botón de cerrar (X) */
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    transition: transform 0.2s ease;
+}
+
+.close-modal:hover {
+    transform: scale(1.2);
+    color: var(--sas-red);
+}
+
+/* Banner superior del equipo */
+.modal-banner {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+}
+
+.modal-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, var(--bg-card), transparent);
+}
+
+.modal-logo {
+    width: 90px;
+    height: 90px;
+    background: var(--bg-card);
+    padding: 8px;
+    border-radius: 15px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    object-fit: contain;
+}
+
+/* Cuerpo del modal */
+.modal-body {
+    padding: 30px;
+}
+
+#modalTeamName {
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* --- SOLUCIÓN A LA IMAGEN GIGANTE --- */
+.team-full-photo {
+    width: 100%;
+    max-height: 380px; /* Límite de altura para que no ocupe todo */
+    object-fit: cover; /* Mantiene la proporción sin estirarse */
+    border-radius: 12px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Tabla de jugadores */
+.players-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.players-table th {
+    text-align: left;
+    color: var(--sas-green);
+    padding: 12px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.players-table td {
+    padding: 14px 12px;
+    color: var(--text-dim);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.players-table tr:hover td {
+    color: white;
+    background: rgba(255, 255, 255, 0.02);
 }

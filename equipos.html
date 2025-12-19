@@ -9,22 +9,22 @@
 <body>
 
 <header>
-        <div class="team-strip">
-            <img src="imagenes/cacn.jpg" alt="CACN" class="team-logo">
-            <img src="imagenes/explosivos.jpg" alt="Los Explosivos" class="team-logo">
-            <img src="imagenes/hermas.jpg" alt="Hermas FC" class="team-logo">
-            <img src="imagenes/llorvi.jpg" alt="LLorvi" class="team-logo">
-            <img src="imagenes/semenup.jpg" alt="Semen Up" class="team-logo">
-    </div>
+                <div class="team-strip">
+                    <img src="imagenes/cacn .png" alt="CACN" class="team-logo">
+                    <img src="imagenes/losexplosivos.png" alt="Los Explosivos" class="team-logo">
+                    <img src="imagenes/hermas.png" alt="Hermas FC" class="team-logo">
+                    <img src="imagenes/llorvi.png" alt="LLorvi" class="team-logo">
+                    <img src="imagenes/semenup.png" alt="Semen Up" class="team-logo">
+            </div>
 
-        <nav>
+                <nav>
                     <a href="equipos.html">Equipos</a>
                     <a href="estadisticas.html">Estadísticas</a>
                     <a href="index.html">Torneo</a>
                     <a href="reglamento.html">Reglamento</a>
                     <a href="sponsors.html">Sponsors</a>
                 </nav>
-    </header>
+        </header>
 
 <div class="container" style="grid-template-columns: 1fr;">
     <div class="card-header" style="text-align: center; margin-bottom: 40px; background: none; border: none;">
@@ -36,9 +36,9 @@
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 10px;">
         
-        <div class="card team-card-large">
+        <div class="card team-card-large" onclick="openTeam('cacn')">
             <div class="team-logo-container">
-                <img src="imagenes/cacn.jpg" alt="CACN FC">
+                <img src="imagenes/cacn .png" alt="CACN FC">
             </div>
             <div class="team-info">
                 <span class="team-tag">Participante</span>
@@ -46,9 +46,9 @@
             </div>
         </div>
 
-        <div class="card team-card-large">
+        <div class="card team-card-large" onclick="openTeam('hermas')">
             <div class="team-logo-container">
-                <img src="imagenes/hermas.jpg" alt="HERMAS FC">
+                <img src="imagenes/hermas.png" alt="HERMAS FC">
             </div>
             <div class="team-info">
                 <span class="team-tag">Participante</span>
@@ -58,7 +58,7 @@
 
         <div class="card team-card-large">
             <div class="team-logo-container">
-                <img src="imagenes/llorvi.jpg" alt="LLORVI FC">
+                <img src="imagenes/llorvi.png" alt="LLORVI FC">
             </div>
             <div class="team-info">
                 <span class="team-tag">Participante</span>
@@ -68,7 +68,7 @@
 
         <div class="card team-card-large">
             <div class="team-logo-container">
-                <img src="imagenes/explosivos.jpg" alt="EXPLOSIVOS FC">
+                <img src="imagenes/losexplosivos.png" alt="EXPLOSIVOS FC">
             </div>
             <div class="team-info">
                 <span class="team-tag">Participante</span>
@@ -78,7 +78,7 @@
 
         <div class="card team-card-large">
             <div class="team-logo-container">
-                <img src="imagenes/semenup.jpg" alt="SEMEN UP">
+                <img src="imagenes/semenup.png" alt="SEMEN UP">
             </div>
             <div class="team-info">
                 <span class="team-tag">Participante</span>
@@ -88,6 +88,102 @@
 
     </div>
 </div>
+
+
+<div id="teamModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        
+        <div id="modalBanner" class="modal-banner">
+            <img id="modalLogo" src="" alt="Logo" class="modal-logo">
+        </div>
+
+        <div class="modal-body">
+            <h2 id="modalTeamName"></h2>
+            
+            <div class="team-photo-container">
+                <img id="modalTeamPhoto" src="" alt="Foto del equipo" class="team-full-photo">
+            </div>
+
+            <h3>Plantel Oficial</h3>
+            <table class="players-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Posición</th>
+                    </tr>
+                </thead>
+                <tbody id="modalPlayersList">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+const teamData = {
+    'cacn': {
+        name: 'CACN FC',
+        logo: 'imagenes/cacn .png', // Logo circular
+        banner: 'imagenes/banderas/bandera-cacn.png', // Tu nueva imagen de bandera
+        photo: 'imagenes/fotos-equipos/plantel-cacn.png', // Tu nueva foto del equipo
+        players: [
+            { name: 'Gonzalo Orellana', pos: 'Arquero' },
+            { name: 'Francisco De Cilia', pos: 'Defensor' },
+            { name: 'Santiago Tahhan', pos: 'Defensor' },
+            { name: 'Leonel Pereyra', pos: 'Mediocampista' },
+            { name: 'Mateo Vuigner', pos: 'Mediocampista' },
+
+        ]
+    },
+    'hermas': {
+        name: 'HERMAS FC',
+        logo: 'imagenes/hermas.png',
+        banner: 'imagenes/banderas/bandera-hermas.PNG',
+        photo: 'imagenes/fotos-equipos/plantel-hermas.png',
+        players: [
+            { name: 'Nacho Garay ', pos: 'Arquero' },
+            { name: 'Nacho Garay ', pos: 'Defensa' },
+            { name: 'Nacho Garay ', pos: 'Arquero' },
+            { name: 'Nacho Garay ', pos: 'Defensa' },
+            { name: 'Nacho Garay ', pos: 'Arquero' },
+            { name: 'Nacho Garay ', pos: 'Defensa' },
+            { name: 'Nacho Garay ', pos: 'Arquero' },
+            { name: 'Nacho Garay ', pos: 'Defensa' },
+        ]
+    },
+    // Repite para Llorvi, Semen Up y Los Explosivos...
+};
+
+function openTeam(teamId) {
+    const team = teamData[teamId];
+    if (!team) return;
+
+    document.getElementById('modalTeamName').innerText = team.name;
+    document.getElementById('modalLogo').src = team.logo;
+    document.getElementById('modalBanner').style.backgroundImage = `url(${team.banner})`;
+    document.getElementById('modalTeamPhoto').src = team.photo;
+
+    const list = document.getElementById('modalPlayersList');
+    list.innerHTML = team.players.map(p => `
+        <tr>
+            <td>${p.name}</td>
+            <td>${p.pos}</td>
+        </tr>
+    `).join('');
+
+    document.getElementById('teamModal').style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById('teamModal').style.display = "none";
+}
+
+
+</script>
+
+
 
 </body>
 </html>
