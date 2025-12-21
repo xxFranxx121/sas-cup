@@ -33,6 +33,9 @@ body {
     color: var(--text-light);
     padding-bottom: 50px;
     min-height: 100vh;
+    overflow-x: hidden; /* IMPORTANTE: Evita que la pantalla se mueva a los costados */
+    width: 100%;
+    position: relative;
 }
 
 /* --- HEADER --- */
@@ -40,6 +43,24 @@ header {
     text-align: center;
     padding: 30px 0;
     background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 20px 0; /* Menos altura */
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap; /* Si no entran, bajan a la siguiente línea */
+        justify-content: center;
+        gap: 10px; /* Espacio uniforme */
+    }
+
+    nav a {
+        margin: 5px; /* Reducir margen lateral */
+        font-size: 0.7rem; /* Letra más chica */
+    }
 }
 
 .team-strip {
@@ -155,7 +176,8 @@ nav a:hover {
 /* --- AJUSTES PARA MÓVIL (Solo pantallas pequeñas) --- */
 @media (max-width: 480px) {
     .container {
-        padding: 0 10px;
+        padding: 0 15px; /* Reducimos un poco el padding lateral en móvil */
+        overflow: hidden; /* Corta cualquier hijo rebelde */
     }
 
     .match-item {
@@ -202,6 +224,29 @@ nav a:hover {
     .stats-row { grid-template-columns: 1fr; }
     .mvp-card { height: auto; flex-direction: column; }
     .mvp-content, .mvp-image-container { width: 100%; }
+
+.card-header {
+    flex-direction: column; /* Apilar título y texto */
+    text-align: center;
+    padding: 10px;
+    align-items: center;
+}
+
+/* Específico para el texto descriptivo */
+.card-header p {
+    font-size: 0.9rem !important; /* Reducir tamaño */
+    max-width: 100%;
+    white-space: normal; /* Permitir que el texto baje de renglón */
+    padding: 0 10px;
+    line-height: 1.4;
+}
+
+.card-header h2 {
+    font-size: 2rem !important; /* Ajustar el título gigante */
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+
 }
 /* --- TARJETAS GENERALES --- */
 .card {
@@ -1149,24 +1194,33 @@ tr:nth-child(2) td:first-child {
 
 /* --- RESPONSIVE (Móvil) --- */
 @media (max-width: 768px) {
-    .modal { align-items: flex-end; } /* Modal abajo en móvil */
-    .modal-content { 
-        max-width: 100%; 
-        width: 100%; 
-        height: 85vh; 
-        border-bottom-left-radius: 0; 
-        border-bottom-right-radius: 0;
-        margin: 0;
+    .modal {
+        align-items: flex-end; /* Pegado al fondo */
+        padding: 0;
+        z-index: 9999; /* Asegura que esté por encima de todo */
+    }
+        .modal-content {
+        width: 100%;
+        height: 80vh; /* Un poco menos de altura para seguridad */
+        /* Opcional: usar dvh si quieres modernidad */
+        /* height: 80dvh; */ 
+        border-radius: 20px 20px 0 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; /* Importante */
     }
     
     .modal-body-grid {
-        grid-template-columns: 1fr; /* Una sola columna */
-        overflow-y: auto; /* Scroll general */
-        padding: 20px;
-        gap: 20px;
-        display: block; /* Cambiamos grid por block para scrollear todo */
+    display: block;
+    flex: 1; /* Ocupa todo el espacio restante */
+    overflow-y: auto; /* SCROLL AQUI */
+    padding-bottom: 40px; /* Espacio extra al final para scroll cómodo */
     }
 
+    .team-photo-compact {
+    height: 150px; /* Controlar la altura de la foto */
+    margin-bottom: 20px;
+}
     .team-identity-col { margin-bottom: 20px; }
     .modal-logo-circle { width: 80px; height: 80px; margin-top: -40px; }
     .team-photo-compact { height: 140px; } /* Foto aún más chica en móvil */
@@ -1307,17 +1361,13 @@ tr:nth-child(2) td:first-child {
 
     /* La Tarjeta convertida en Fila */
     .team-card-large {
-        flex-direction: row; /* Horizontal */
+        flex-direction: row; 
         align-items: center;
-        justify-content: space-between; /* CLAVE: Separa texto a la izq y flecha a la der */
-        padding: 15px 15px; /* Padding seguro */
-        min-height: auto;
-        width: 100%; /* Asegura que no sea más ancho que la pantalla */
-        
-        background: var(--bg-card); 
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
-        box-sizing: border-box; /* Asegura que el padding no sume ancho */
+        justify-content: space-between;
+        padding: 15px 12px; /* Un poco menos de padding para dar aire */
+        width: 100%; 
+        box-sizing: border-box; /* Vital para que el padding no sume ancho */
+        gap: 10px; /* Espacio entre logo, texto y flecha */
     }
 
     /* Logo pequeño */
@@ -1330,20 +1380,20 @@ tr:nth-child(2) td:first-child {
 
     /* Texto (Nombre y Tag) */
     .team-card-large .team-info {
-        flex: 1; /* Ocupa todo el espacio central */
+        flex: 1; 
+        min-width: 0; /* EL TRUCO MAGICO: Permite que el texto se corte con puntos suspensivos */
         display: flex;
-        flex-direction: column-reverse; /* Nombre arriba, tag abajo */
+        flex-direction: column-reverse; 
         align-items: flex-start;
-        overflow: hidden; /* Evita desbordes de texto */
     }
 
     .team-card-large .team-info h3 {
-        font-size: 0.95rem; /* Tamaño legible */
-        margin: 0;
-        white-space: nowrap; /* Texto en una sola línea */
+        font-size: 0.9rem;
+        white-space: nowrap; /* Una sola línea */
         overflow: hidden;
-        text-overflow: ellipsis; /* Puntos suspensivos si es muy largo */
+        text-overflow: ellipsis; /* Pone "..." si es muy largo */
         width: 100%;
+        text-align: left;
     }
 
     .team-card-large .team-tag {
@@ -1355,10 +1405,129 @@ tr:nth-child(2) td:first-child {
     /* LA FLECHA (Arreglada) */
     .team-card-large::after {
         content: "➜";
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         color: var(--text-dim);
-        opacity: 0.6;
-        margin-left: 10px;
-        flex-shrink: 0; /* IMPORTANTE: Impide que la flecha se corte o achique */
+        margin-left: 5px; 
+        flex-shrink: 0; /* IMPORTANTE: Prohíbe que la flecha se aplaste o desaparezca */
+    }
+}
+
+/* --- REDISEÑO DEL MODAL EN MÓVIL (Estilo Perfil Moderno) --- */
+@media (max-width: 768px) {
+
+    /* 1. La ventana emergente (Bottom Sheet) */
+    .modal {
+        align-items: flex-end; /* Pegado abajo */
+    }
+    
+    .modal-content {
+        height: 85vh; /* Ocupa casi toda la altura */
+        border-radius: 20px 20px 0 0; /* Redondeado solo arriba */
+        overflow: hidden; /* Corta lo que sobre */
+        display: flex;
+        flex-direction: column;
+        background: #020617; /* Fondo oscuro sólido */
+    }
+
+    /* 2. Banner Superior */
+    .modal-header-strip {
+        height: 80px; /* Altura fija para el banner */
+        flex-shrink: 0;
+        position: relative;
+    }
+
+    /* Botón cerrar más visible */
+    .close-modal {
+        top: 15px;
+        right: 15px;
+        background: rgba(0,0,0,0.6); /* Fondo negro semitransparente */
+        color: white;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        padding-bottom: 4px; /* Ajuste visual */
+        z-index: 200;
+    }
+
+    /* 3. Cuerpo con Scroll */
+    .modal-body-grid {
+        display: block; /* Bloque simple, no grid */
+        overflow-y: auto; /* Scroll aquí */
+        padding: 0; /* Quitamos padding general para que el banner toque bordes */
+        height: 100%;
+    }
+
+    /* 4. Cabecera del Equipo (Logo y Nombre) */
+    .team-identity-col {
+        margin-top: -40px; /* Subimos para pisar el banner */
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Logo centrado y limpio */
+    .modal-logo-circle {
+        width: 80px;
+        height: 80px;
+        background: #020617; /* Mismo color que fondo modal para "recortar" */
+        border: 2px solid var(--sas-blue);
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 5px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .modal-team-name {
+        font-size: 1.6rem;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    /* 5. FOTO DEL EQUIPO (Arreglo principal) */
+    .team-photo-compact {
+        width: 100%; /* Ancho total del contenedor */
+        height: auto; /* Altura automática según la imagen */
+        max-height: 200px; /* Límite para que no sea gigante */
+        margin-bottom: 20px;
+        border: none; /* Quitamos bordes raros */
+        background: transparent;
+        box-shadow: none;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .team-photo-compact img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Llena el espacio y se ve bien */
+        display: block;
+    }
+
+    /* 6. Lista de Jugadores (Tabla) */
+    .team-squad-col {
+        margin: 0 20px 40px 20px; /* Margen a los lados y abajo */
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        padding: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .squad-title {
+        color: var(--sas-green);
+        text-align: left;
+        margin-bottom: 10px;
+    }
+
+    .players-table td {
+        padding: 12px 10px;
+        font-size: 0.9rem;
     }
 }
