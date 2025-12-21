@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="card team-card-large">
+        <div class="card team-card-large" onclick="openTeam('Llorvi')">
             <div class="team-logo-container">
                 <img src="imagenes/llorvi.png" alt="LLORVI FC">
             </div>
@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div class="card team-card-large">
+        <div class="card team-card-large" onclick="openTeam('Los Explosivos')">
             <div class="team-logo-container">
                 <img src="imagenes/losexplosivos.png" alt="EXPLOSIVOS FC">
             </div>
@@ -76,7 +76,7 @@
             </div>
         </div>
 
-        <div class="card team-card-large">
+        <div class="card team-card-large" onclick="openTeam('Semen Up')">
             <div class="team-logo-container">
                 <img src="imagenes/semenup.png" alt="SEMEN UP">
             </div>
@@ -94,28 +94,29 @@
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal()">&times;</span>
         
-        <div id="modalBanner" class="modal-banner">
-            <img id="modalLogo" src="" alt="Logo" class="modal-logo">
-        </div>
+        <div id="modalBanner" class="modal-header-strip"></div>
 
-        <div class="modal-body">
-            <h2 id="modalTeamName"></h2>
+        <div class="modal-body-grid">
             
-            <div class="team-photo-container">
-                <img id="modalTeamPhoto" src="" alt="Foto del equipo" class="team-full-photo">
+            <div class="team-identity-col">
+                <img id="modalLogo" src="" alt="Logo" class="modal-logo-circle">
+                <h2 id="modalTeamName" class="modal-team-name"></h2>
+                
+                <div class="team-photo-compact">
+                    <img id="modalTeamPhoto" src="" alt="Foto Equipo">
+                </div>
             </div>
 
-            <h3>Plantel Oficial</h3>
-            <table class="players-table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Posición</th>
-                    </tr>
-                </thead>
-                <tbody id="modalPlayersList">
-                    </tbody>
-            </table>
+            <div class="team-squad-col">
+                <div class="squad-title">Plantel Oficial 2025</div>
+                <div class="scrollable-table-wrapper">
+                    <table class="players-table">
+                        <tbody id="modalPlayersList">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -126,14 +127,21 @@ const teamData = {
     'cacn': {
         name: 'CACN FC',
         logo: 'imagenes/cacn .png', // Logo circular
-        banner: 'imagenes/banderas/bandera-cacn.png', // Tu nueva imagen de bandera
+        banner: 'imagenes/banderas/bandera-cacn.PNG', // Tu nueva imagen de bandera
         photo: 'imagenes/fotos-equipos/plantel-cacn.png', // Tu nueva foto del equipo
         players: [
-            { name: 'Gonzalo Orellana', pos: 'Arquero' },
-            { name: 'Francisco De Cilia', pos: 'Defensor' },
-            { name: 'Santiago Tahhan', pos: 'Defensor' },
-            { name: 'Leonel Pereyra', pos: 'Mediocampista' },
-            { name: 'Mateo Vuigner', pos: 'Mediocampista' },
+            { name: 'Francico De Cilia', pos: 'A confirmar' },
+            { name: 'Santiago Tahhan', pos: 'A confirmar' },
+            { name: 'Alejo Reynoso', pos: 'A confirmar' },
+            { name: 'Mateo Vuigner', pos: 'A confirmar' },
+            { name: 'Gonzalo Orellana', pos: 'A confirmar' },
+            { name: 'Nicolas Barrionuevo', pos: 'A confirmar' },
+            { name: 'Massimo Macchiarola', pos: 'A confirmar' },
+            { name: 'Benjamin Castiglione', pos: 'A confirmar' },
+            { name: 'Juan Repolles', pos: 'A confirmar' },
+            { name: 'Maximo Fernandez Rozze', pos: 'A confirmar' },
+            { name: 'Nacho Ayunta', pos: 'A confirmar' },
+            { name: 'Leonel Pereyra', pos: 'A confirmar' },
 
         ]
     },
@@ -143,16 +151,80 @@ const teamData = {
         banner: 'imagenes/banderas/bandera-hermas.PNG',
         photo: 'imagenes/fotos-equipos/plantel-hermas.png',
         players: [
-            { name: 'Nacho Garay ', pos: 'Arquero' },
-            { name: 'Nacho Garay ', pos: 'Defensa' },
-            { name: 'Nacho Garay ', pos: 'Arquero' },
-            { name: 'Nacho Garay ', pos: 'Defensa' },
-            { name: 'Nacho Garay ', pos: 'Arquero' },
-            { name: 'Nacho Garay ', pos: 'Defensa' },
-            { name: 'Nacho Garay ', pos: 'Arquero' },
-            { name: 'Nacho Garay ', pos: 'Defensa' },
+            { name: 'Lorenzo Gomez Corti', pos: 'A confirmar' },
+            { name: 'Ramiro Ibañez', pos: 'A confirmar' },
+            { name: 'Tomas Cristofoli', pos: 'A confirmar' },
+            { name: 'Bautista Moretta', pos: 'A confirmar' },
+            { name: 'Dario Arevalo', pos: 'A confirmar' },
+            { name: 'Nicolas Lucena', pos: 'A confirmar' },
+            { name: 'Matias Robinson', pos: 'A confirmar' },
+            { name: 'Zair Nabac', pos: 'A confirmar' },
+            { name: 'Franco Ciappino', pos: 'A confirmar' },
+            { name: 'Agustin Rodriguez', pos: 'A confirmar' },
+            { name: 'Juan Pablo Martinez', pos: 'A confirmar' },
+            { name: 'Fabrizzio Fanchin', pos: 'A confirmar' },
         ]
     },
+    'Los Explosivos': {
+        name: 'EXPLOSIVOS FC',
+        logo: 'imagenes/losexplosivos.png',
+        banner: 'imagenes/banderas/bandera-explosivos.PNG',
+        photo: '',
+        players: [
+            { name: 'Octavio Vidarte', pos: 'A confirmar' },
+            { name: 'Leandro Campos', pos: 'A confirmar' },
+            { name: 'Fabricio Flint', pos: 'A confirmar' },
+            { name: 'Fabrizzio Alcalde', pos: 'A confirmar' },
+            { name: 'Valentin Barreto', pos: 'A confirmar' },
+            { name: 'Valentin Mentesana', pos: 'A confirmar' },
+            { name: 'Lautaro Morales', pos: 'A confirmar' },
+            { name: 'Benjamin Cerioni', pos: 'A confirmar' },
+            { name: 'Rodrigo Luna', pos: 'A confirmar' },
+            { name: 'Ignacio Pericas', pos: 'A confirmar' },
+        ]
+    },
+    'Semen Up': {
+        name: 'SEMEN UP FC',
+        logo: 'imagenes/semenup.png',
+        banner: 'imagenes/banderas/bandera-semenup.PNG',
+        photo: 'imagenes/fotos-equipos/semenup equipo.png',
+        players: [
+            { name: 'Alonso Pavon', pos: 'A confirmar' },
+            { name: 'Tomas Tahhan', pos: 'A confirmar' },
+            { name: 'Lucca Brunetti', pos: 'A confirmar' },
+            { name: 'Stefano Franz', pos: 'A confirmar' },
+            { name: 'Estani Posse', pos: 'A confirmar' },
+            { name: 'Lautaro Lopez', pos: 'A confirmar' },
+            { name: 'Martin Valdez', pos: 'A confirmar' },
+            { name: 'Baltasar Rigourd', pos: 'A confirmar' },
+            { name: 'Octavio Mattalia', pos: 'A confirmar' },
+            { name: 'Nacho Garay', pos: 'A confirmar' },
+            { name: 'Tomas Verdugo', pos: 'A confirmar' },
+            { name: 'Valentino Zamora', pos: 'A confirmar' },
+            { name: 'Guillermo Garay', pos: 'A confirmar' },
+        ]
+    },
+    'Llorvi': {
+        name: 'LLORVI FC',
+        logo: 'imagenes/llorvi.png',
+        banner: 'imagenes/banderas/bandera-llorvi.PNG',
+        photo: 'imagenes/fotos-equipos/llorvi equipo.png',
+        players: [
+            { name: 'Martin Juvenal Pena', pos: 'A confirmar' },
+            { name: 'Agustin Rojo', pos: 'A confirmar' },
+            { name: 'Franco Rojas', pos: 'A confirmar' },
+            { name: 'Augusto Merletti', pos: 'A confirmar' },
+            { name: 'Carlos Octavio Bahr', pos: 'A confirmar' },
+            { name: 'Santino Degano Sal', pos: 'A confirmar' },
+            { name: 'Maximo Adibi Llorvandi', pos: 'A confirmar' },
+            { name: 'Joaquin Peralta Galvan', pos: 'A confirmar' },
+            { name: 'Nicolas Cayetano Alvarez Rodriguez', pos: 'A confirmar' },
+            { name: 'Livio Valentin Yocca Fuhr', pos: 'A confirmar' },
+            { name: 'Ignacio Kowslowski', pos: 'A confirmar' },
+            { name: 'Franco Fattor', pos: 'A confirmar' },
+            { name: 'Bautista Aranda', pos: 'A confirmar' },
+        ]
+    }
     // Repite para Llorvi, Semen Up y Los Explosivos...
 };
 
@@ -163,7 +235,16 @@ function openTeam(teamId) {
     document.getElementById('modalTeamName').innerText = team.name;
     document.getElementById('modalLogo').src = team.logo;
     document.getElementById('modalBanner').style.backgroundImage = `url(${team.banner})`;
-    document.getElementById('modalTeamPhoto').src = team.photo;
+    
+    // Manejo de foto: Si no tiene foto, poner una por defecto o ocultar
+    const photoImg = document.getElementById('modalTeamPhoto');
+    if(team.photo) {
+        photoImg.src = team.photo;
+        photoImg.style.display = 'block';
+    } else {
+        // Opcional: poner una imagen placeholder si no hay foto
+        photoImg.style.display = 'none'; 
+    }
 
     const list = document.getElementById('modalPlayersList');
     list.innerHTML = team.players.map(p => `
@@ -173,11 +254,20 @@ function openTeam(teamId) {
         </tr>
     `).join('');
 
-    document.getElementById('teamModal').style.display = "block";
+    // CAMBIO IMPORTANTE AQUÍ: Usamos flex para centrar
+    document.getElementById('teamModal').style.display = "flex"; 
 }
 
 function closeModal() {
     document.getElementById('teamModal').style.display = "none";
+}
+
+// Cerrar si se hace click fuera del contenido
+window.onclick = function(event) {
+    const modal = document.getElementById('teamModal');
+    if (event.target == modal) {
+        closeModal();
+    }
 }
 
 

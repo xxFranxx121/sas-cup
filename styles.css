@@ -54,6 +54,19 @@ header {
 }
 
 /* Estilo general para todos los escudos de equipo (header y lista de partidos) */
+
+.team-logo-formatotorneo{
+    width: 60px;          /* Un poco más grandes */
+    height: 60px;
+    border-radius: 50%; 
+    /* Fondo blanco para que el PNG transparente resalte */
+    background: none;    
+    /* Padding para que el logo no toque los bordes del círculo */
+    padding: 5px;         
+    /* Cambiamos 'cover' por 'contain' para que no se corte ninguna parte del escudo */
+    object-fit: contain;  
+    transition: all 0.3s ease;
+}
 /* --- AJUSTE PARA LOGOS PNG EN EL HEADER --- */
 .team-logo {
     width: 60px;          /* Un poco más grandes */
@@ -170,8 +183,11 @@ nav a:hover {
     }
 
     .team-logo {
-        width: 30px !important;
-        height: 30px !important;
+        width: 50px !important;
+        height: 50px !important;
+        border: none; /* Borde con color de la liga */
+        box-shadow: none;
+
     }
 
     .team-vs {
@@ -283,90 +299,91 @@ nav a:hover {
 }
 
 /* --- MVP CARD (Estilo Copa) --- */
-/* --- TARJETA MVP ESTILO SPLIT (COMO TU FOTO) --- */
+/* --- TARJETA MVP OPTIMIZADA --- */
 
 .mvp-card {
-    /* Quitamos el padding para que los colores toquen los bordes */
-    padding: 0 !important; 
     /* Usamos Flexbox para dividir izquierda/derecha */
     display: flex; 
     flex-direction: row;
-    height: 400px; /* Hacemos la tarjeta bien alta */
+    height: 350px; /* Altura fija en PC para que se vea elegante */
     border: none;
-    overflow: hidden; /* Para que la imagen no se salga de las esquinas redondeadas */
-    background: #020617; /* Fondo base */
+    overflow: hidden; 
+    background: #020617; /* Fondo negro base */
+    border-radius: var(--radius); /* Aseguramos bordes redondeados */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-/* --- LADO IZQUIERDO (ROJO) --- */
+/* LADO IZQUIERDO (ROJO) */
 .mvp-content {
-    width: 40%; /* Ocupa el 35% del ancho */
-    background: linear-gradient(180deg, #b91c49 0%, #9f1239 100%); /* Gradiente Rojo/Rosa */
+    flex: 0 0 40%; /* Ancho fijo del 40% (no usa width para evitar errores de cálculo) */
+    background: linear-gradient(180deg, #b91c49 0%, #9f1239 100%); 
     padding: 40px 30px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Separa el título del nombre abajo */
+    justify-content: center; /* Centramos el contenido verticalmente */
     position: relative;
     z-index: 2;
 }
 
-.mvp-badge {
-    background-color: #580820; /* Color vino oscuro para la etiqueta */
-    color: white;
-    padding: 5px 10px;
-    font-weight: 900;
-    font-size: 0.8rem;
-    display: inline-block;
-    border-radius: 4px;
-    width: fit-content;
-    margin-bottom: 20px;
-}
-
+/* Ajustes de texto para que no se rompan */
 .mvp-content h2 {
-    font-size: 2rem;
-    line-height: 1;
+    font-size: 1.8rem;
+    line-height: 1.1;
     font-weight: 900;
     font-style: italic;
     color: white;
-    margin: 0;
-}
-
-.mvp-content h2 span {
-    font-size: 3.5rem; /* El número "1" más grande */
-    display: block;
-}
-
-.mvp-player-info {
-    margin-top: auto;
-}
-
-.mvp-player-info .name {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 2px;
-}
-
-.mvp-player-info .team {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.7);
-    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: auto; /* Empuja la info del jugador hacia abajo */
 }
 
 /* LADO DERECHO (IMAGEN) */
 .mvp-image-container {
-    width: 65%; /* Le damos un poco más de espacio a la foto */
+    flex: 1; /* Ocupa TODO el espacio restante automáticamente */
     position: relative;
-    background-color: transparent; /* Quitamos el negro de fondo */
+    background-color: #000; /* Fondo negro para que se fusione con la imagen */
+    display: flex;          /* Truco para centrar la imagen perfectamente */
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
 }
 
 .mvp-image-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center 10%; /* Sube un poco la foto para que se vea la cara */
-    filter: none !important; /* Fuerza a que no haya filtros */
-    mix-blend-mode: normal !important; /* Fuerza color normal */
+    /* CLAVE: Usamos 'cover' para llenar, pero centrado. 
+       Si la imagen tiene texto importante en los bordes, cambia 'cover' por 'contain' */
+    object-fit: cover; 
+    object-position: center;
+    opacity: 0.9; /* Un toque sutil para que no brille tanto */
+    transition: transform 0.5s ease;
+}
+
+/* Efecto zoom suave al pasar el mouse por la tarjeta */
+.mvp-card:hover .mvp-image-container img {
+    transform: scale(1.05);
+}
+
+/* --- VERSIÓN MÓVIL (Celulares) --- */
+@media (max-width: 768px) {
+    .mvp-card {
+        flex-direction: column; /* Apila uno sobre otro */
+        height: auto; /* La altura se adapta al contenido */
+    }
+
+    .mvp-content {
+        width: 100%;
+        padding: 30px 20px;
+        flex: none; /* Quitamos la restricción de flex */
+    }
+    
+    .mvp-content h2 {
+        font-size: 1.5rem; /* Texto un poco más chico */
+    }
+
+    .mvp-image-container {
+        width: 100%;
+        height: 250px; /* IMPORTANTE: Altura fija para la imagen en el celular */
+    }
 }
 
 
@@ -952,144 +969,314 @@ tr:nth-child(2) td:first-child {
 
 
 
-
-
-
-
-/* =========================================
-   ESTILOS COMPLETOS DEL MODAL (CORREGIDO)
-   ========================================= */
-
-/* Fondo oscuro que cubre toda la pantalla */
+/* =========================
+   NUEVO MODAL COMPACTO
+========================= */
 .modal {
-    display: none; /* Se activa por JS */
-    position: fixed; /* Asegura que flote sobre todo */
-    z-index: 2000; /* Por encima de cualquier otro elemento */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* Fondo negro traslúcido */
-    backdrop-filter: blur(8px); /* Efecto de desenfoque al fondo */
-    overflow-y: auto; /* Permite scroll si el contenido es muy largo */
-    padding: 20px 0;
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    align-items: center;     /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
 }
 
-/* Caja blanca/oscura que contiene la info */
+/* Contenedor principal: Más ancho para permitir 2 columnas */
 .modal-content {
     background-color: var(--bg-card);
-    margin: 2% auto; /* Margen superior pequeño y centrado horizontal */
-    width: 90%;
-    max-width: 750px;
+    width: 95%;
+    max-width: 850px; /* Ancho cómodo para escritorio */
+    height: auto;
+    max-height: 85vh; /* Evita que se salga de la pantalla */
     border-radius: 20px;
-    overflow: hidden; /* Corta lo que sobresalga de los bordes redondeados */
     border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     position: relative;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-    animation: modalAppear 0.4s ease-out; /* Animación de entrada */
+    animation: zoomIn 0.3s ease;
 }
 
-@keyframes modalAppear {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Botón de cerrar (X) */
+/* Botón cerrar */
 .close-modal {
     position: absolute;
-    right: 20px;
     top: 15px;
-    color: white;
-    font-size: 35px;
+    right: 20px;
+    color: var(--text-dim);
+    font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-    z-index: 10;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    transition: transform 0.2s ease;
+    z-index: 100;
+    transition: color 0.3s;
 }
+.close-modal:hover { color: var(--sas-red); }
 
-.close-modal:hover {
-    transform: scale(1.2);
-    color: var(--sas-red);
-}
-
-/* Banner superior del equipo */
-.modal-banner {
-    height: 200px;
+/* Banner decorativo superior (muy fino) */
+.modal-header-strip {
+    height: 60px;
     background-size: cover;
     background-position: center;
     position: relative;
+}
+/* Gradiente para oscurecer el banner */
+.modal-header-strip::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent, var(--bg-card));
+}
+
+/* GRID PRINCIPAL: Izquierda (Info) - Derecha (Lista) */
+.modal-body-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr; /* Columna fija izq, resto derecha */
+    gap: 30px;
+    padding: 20px 30px 30px 30px;
+    height: 100%;
+    overflow: hidden; /* Importante para que el scroll sea interno */
+}
+
+/* COLUMNA IZQUIERDA: Identidad */
+.team-identity-col {
     display: flex;
-    align-items: flex-end;
-    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    position: relative; /* AGREGAR ESTO: actúa como ancla para el logo */
+    padding-top: 60px;  /* AGREGAR ESTO: deja espacio para que el nombre no choque con el logo flotante */
 }
 
-.modal-banner::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60%;
-    background: linear-gradient(to top, var(--bg-card), transparent);
-}
-
-.modal-logo {
-    width: 90px;
-    height: 90px;
+/* Logo superpuesto al banner */
+.modal-logo-circle {
+    width: 100px;           /* Tamaño fijo del círculo */
+    height: 100px;
+    border-radius: 50%;
     background: var(--bg-card);
-    padding: 8px;
-    border-radius: 15px;
+    border: 3px solid var(--sas-blue);
+    
+    /* Posicionamiento para que flote sobre el banner */
     position: relative;
-    z-index: 2;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    object-fit: contain;
+    z-index: 10;
+    margin-top: -50px;      /* Sube la mitad de su tamaño */
+    margin-bottom: 10px;    /* Separa el logo del nombre del equipo */
+    
+    /* AJUSTE INTERNO DEL ESCUDO */
+    padding: 10px;          /* Espacio para que el escudo no toque el borde azul */
+    object-fit: contain;    /* Evita que el escudo se deforme o se corte */
+    display: block;         /* Asegura que respete los márgenes */
+    margin-left: auto;      /* Centrado horizontal */
+    margin-right: auto;
+    
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
-/* Cuerpo del modal */
-.modal-body {
-    padding: 30px;
-}
-
-#modalTeamName {
-    font-size: 2.2rem;
+.modal-team-name {
+    font-size: 1.8rem;
     font-weight: 900;
-    margin-bottom: 20px;
     text-transform: uppercase;
+    color: var(--text-light);
+    line-height: 1;
+    margin-bottom: 5px;
 }
 
-/* --- SOLUCIÓN A LA IMAGEN GIGANTE --- */
-.team-full-photo {
+/* FOTO DEL EQUIPO COMPACTA */
+.team-photo-compact {
     width: 100%;
-    max-height: 380px; /* Límite de altura para que no ocupe todo */
-    object-fit: cover; /* Mantiene la proporción sin estirarse */
+    height: auto; /* Altura fija pequeña */
     border-radius: 12px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
 }
 
-/* Tabla de jugadores */
-.players-table {
+.team-photo-compact img {
     width: 100%;
-    border-collapse: collapse;
+    height: 100%;
+    object-fit: contain; /* Recorta la imagen para llenar el espacio sin deformar */
+    transition: transform 0.5s;
 }
 
-.players-table th {
-    text-align: left;
+.team-photo-compact:hover img {
+    transform: scale(1.1); /* Efecto zoom sutil */
+}
+
+/* COLUMNA DERECHA: Lista de jugadores */
+.team-squad-col {
+    background: rgba(0,0,0,0.2);
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Contiene el scroll */
+}
+
+.squad-title {
+    font-size: 0.9rem;
     color: var(--sas-green);
-    padding: 12px;
-    font-size: 0.8rem;
     text-transform: uppercase;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    font-weight: 800;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.players-table td {
-    padding: 14px 12px;
-    color: var(--text-dim);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+/* Scroll solo para la tabla */
+.scrollable-table-wrapper {
+    overflow-y: auto; /* Scroll vertical */
+    flex: 1; /* Ocupa el espacio restante */
+    padding-right: 5px; /* Espacio para la barra de scroll */
 }
 
-.players-table tr:hover td {
-    color: white;
-    background: rgba(255, 255, 255, 0.02);
+/* Estilo de la barra de scroll fina */
+.scrollable-table-wrapper::-webkit-scrollbar { width: 5px; }
+.scrollable-table-wrapper::-webkit-scrollbar-thumb { background: var(--sas-blue); border-radius: 4px; }
+.scrollable-table-wrapper::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+
+.players-table { width: 100%; font-size: 0.85rem; border-collapse: collapse; }
+.players-table td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.players-table tr:last-child td { border-bottom: none; }
+.players-table td:first-child { font-weight: 700; color: #fff; } /* Nombre */
+.players-table td:last-child { text-align: right; color: var(--text-dim); font-size: 0.75rem; } /* Posición */
+
+/* ANIMACIÓN ENTRADA */
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- RESPONSIVE (Móvil) --- */
+@media (max-width: 768px) {
+    .modal { display: flex !important; align-items: flex-end; } /* Modal abajo en móvil */
+    .modal-content { 
+        max-width: 100%; 
+        width: 100%; 
+        height: 85vh; 
+        border-bottom-left-radius: 0; 
+        border-bottom-right-radius: 0;
+        margin: 0;
+    }
+    
+    .modal-body-grid {
+        grid-template-columns: 1fr; /* Una sola columna */
+        overflow-y: auto; /* Scroll general */
+        padding: 20px;
+        gap: 20px;
+        display: block; /* Cambiamos grid por block para scrollear todo */
+    }
+
+    .team-identity-col { margin-bottom: 20px; }
+    .modal-logo-circle { width: 80px; height: 80px; margin-top: -40px; }
+    .team-photo-compact { height: 140px; } /* Foto aún más chica en móvil */
+    
+    .team-squad-col {
+        height: auto; /* Altura automática */
+        overflow: visible; 
+    }
+    .scrollable-table-wrapper { overflow: visible; }
+}
+
+
+/* =========================
+   RESPONSIVE MOBILE (Estilo Bottom Sheet)
+========================= */
+@media (max-width: 768px) {
+    /* 1. Contenedor del Modal: Pegado abajo */
+    .modal {
+        align-items: flex-end; /* Alinea el modal al fondo de la pantalla */
+        padding: 0;
+    }
+
+    .modal-content { 
+        width: 100%; 
+        max-width: 100%; 
+        height: 85vh; /* Ocupa el 85% de la altura de la pantalla */
+        border-radius: 25px 25px 0 0; /* Solo redondeamos arriba */
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* El banner superior se queda fijo arriba */
+    .modal-header-strip {
+        flex-shrink: 0; /* Evita que el banner se achique */
+        height: 50px; /* Un poco más fino en móvil */
+    }
+
+    /* Botón cerrar más grande y accesible */
+    .close-modal {
+        top: 10px;
+        right: 20px;
+        font-size: 32px;
+        background: rgba(0,0,0,0.5); /* Fondo semitransparente para contraste */
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        padding-bottom: 4px; /* Ajuste visual del caracter x */
+    }
+
+    /* 2. Cuerpo del Modal: Scroll Vertical Unificado */
+    .modal-body-grid {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: 1fr; /* Una sola columna */
+        overflow-y: auto; /* El scroll ocurre AQUI para todo el contenido */
+        padding: 0 20px 40px 20px; /* Padding inferior extra para scroll cómodo */
+        gap: 20px;
+        height: 100%;
+    }
+
+    /* 3. Columna de Identidad (Logo, Nombre, Foto) */
+    .team-identity-col {
+        margin-bottom: 0;
+        padding-top: 0; /* Quitamos el padding de escritorio */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Truco visual: subimos el logo para que pise el banner */
+        margin-top: -35px; 
+    }
+
+    .modal-logo-circle { 
+        width: 80px; 
+        height: 80px; 
+        margin-top: 0;
+        margin-bottom: 10px;
+        background-color: var(--bg-card); /* Importante para tapar el banner */
+    }
+
+    .modal-team-name {
+        font-size: 1.5rem; /* Texto un poco más chico para que no rompa líneas */
+        margin-bottom: 15px;
+    }
+
+    /* 4. FOTO DEL EQUIPO COMPRIMIDA (Tu requerimiento principal) */
+    .team-photo-compact { 
+        height: 130px; /* Altura fija pequeña, tipo "postal" */
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    /* 5. Lista de Jugadores (Se expande completa) */
+    .team-squad-col {
+        height: auto; /* Altura automática, crece según la cantidad de jugadores */
+        overflow: visible; /* Quitamos el scroll interno */
+        background: rgba(255, 255, 255, 0.03); /* Fondo más sutil */
+        margin-bottom: 20px;
+    }
+
+    .scrollable-table-wrapper { 
+        overflow: visible; /* Permite ver toda la tabla */
+        height: auto;
+    }
+    
+    /* Ajustes de la tabla para móvil */
+    .players-table td {
+        padding: 12px 10px; /* Más espacio para dedos */
+        font-size: 0.9rem;
+    }
 }
