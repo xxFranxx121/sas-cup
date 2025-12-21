@@ -1149,7 +1149,7 @@ tr:nth-child(2) td:first-child {
 
 /* --- RESPONSIVE (Móvil) --- */
 @media (max-width: 768px) {
-    .modal { display: flex !important; align-items: flex-end; } /* Modal abajo en móvil */
+    .modal { align-items: flex-end; } /* Modal abajo en móvil */
     .modal-content { 
         max-width: 100%; 
         width: 100%; 
@@ -1278,5 +1278,87 @@ tr:nth-child(2) td:first-child {
     .players-table td {
         padding: 12px 10px; /* Más espacio para dedos */
         font-size: 0.9rem;
+    }
+}
+
+
+/* =========================
+   LISTA DE EQUIPOS (Adaptación Mobile estilo Index)
+========================= */
+
+/* 1. Definición de la grilla (Reemplaza al style inline que quitamos) */
+.teams-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 10px;
+}
+
+/* --- CORRECCIÓN FINAL: LISTA MÓVIL Y FLECHA --- */
+@media (max-width: 768px) {
+
+    /* Contenedor principal */
+    .teams-grid-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 0 5px; /* Un poco de margen lateral */
+    }
+
+    /* La Tarjeta convertida en Fila */
+    .team-card-large {
+        flex-direction: row; /* Horizontal */
+        align-items: center;
+        justify-content: space-between; /* CLAVE: Separa texto a la izq y flecha a la der */
+        padding: 15px 15px; /* Padding seguro */
+        min-height: auto;
+        width: 100%; /* Asegura que no sea más ancho que la pantalla */
+        
+        background: var(--bg-card); 
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        box-sizing: border-box; /* Asegura que el padding no sume ancho */
+    }
+
+    /* Logo pequeño */
+    .team-card-large .team-logo-container {
+        width: 45px; 
+        height: 45px;
+        margin: 0 15px 0 0; /* Margen derecho solamente */
+        flex-shrink: 0; /* Que no se aplaste */
+    }
+
+    /* Texto (Nombre y Tag) */
+    .team-card-large .team-info {
+        flex: 1; /* Ocupa todo el espacio central */
+        display: flex;
+        flex-direction: column-reverse; /* Nombre arriba, tag abajo */
+        align-items: flex-start;
+        overflow: hidden; /* Evita desbordes de texto */
+    }
+
+    .team-card-large .team-info h3 {
+        font-size: 0.95rem; /* Tamaño legible */
+        margin: 0;
+        white-space: nowrap; /* Texto en una sola línea */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Puntos suspensivos si es muy largo */
+        width: 100%;
+    }
+
+    .team-card-large .team-tag {
+        font-size: 0.6rem;
+        padding: 2px 6px;
+        margin: 0 0 4px 0; /* Un poco de margen abajo */
+    }
+
+    /* LA FLECHA (Arreglada) */
+    .team-card-large::after {
+        content: "➜";
+        font-size: 1.1rem;
+        color: var(--text-dim);
+        opacity: 0.6;
+        margin-left: 10px;
+        flex-shrink: 0; /* IMPORTANTE: Impide que la flecha se corte o achique */
     }
 }
