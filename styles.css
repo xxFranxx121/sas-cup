@@ -50,16 +50,38 @@ header {
         padding: 20px 0; /* Menos altura */
     }
 
+    /* --- MENÚ MÓVIL CENTRADO --- */
     nav {
-        display: flex;
-        flex-wrap: wrap; /* Si no entran, bajan a la siguiente línea */
-        justify-content: center;
-        gap: 10px; /* Espacio uniforme */
+        display: grid; /* Usamos Grid en vez de Flex */
+        grid-template-columns: 1fr 1fr; /* Dos columnas del mismo ancho */
+        gap: 10px; /* Espacio entre botones */
+        padding: 0 15px;
+        justify-items: center;
+        align-items: center;
+        width: 100%;
     }
 
     nav a {
-        margin: 5px; /* Reducir margen lateral */
-        font-size: 0.7rem; /* Letra más chica */
+        margin: 0; 
+        font-size: 0.75rem; 
+        text-align: center;
+        width: 100%;
+        padding: 5px 0;
+        /* Opcional: fondo suave para dar estructura de botón */
+        background: rgba(255,255,255,0.03); 
+        border-radius: 8px;
+    }
+
+    /* TRUCO MAGICO: Seleccionamos el 3er elemento (TORNEO) */
+    nav a:nth-child(3) {
+        grid-column: span 2; /* Le decimos que ocupe las 2 columnas */
+        font-weight: 900;    /* Más gordito */
+        font-size: 0.9rem;   /* Un poco más grande */
+        letter-spacing: 2px;
+        color: var(--text-light);
+        background: rgba(255,255,255,0.08); /* Un poco más claro para destacar */
+        border: 1px solid rgba(255,255,255,0.1);
+        order: 0; /* Mantiene su posición natural (el tercero) */
     }
 }
 
@@ -1199,140 +1221,109 @@ tr:nth-child(2) td:first-child {
         padding: 0;
         z-index: 9999; /* Asegura que esté por encima de todo */
     }
-        .modal-content {
+    .modal-content {
+        /* Estructura Flex vertical estricta para controlar el scroll */
+        height: 100%; 
         width: 100%;
-        height: 80vh; /* Un poco menos de altura para seguridad */
-        /* Opcional: usar dvh si quieres modernidad */
-        /* height: 80dvh; */ 
-        border-radius: 20px 20px 0 0;
+        border-radius: 20px 20px 0 0; 
         display: flex;
         flex-direction: column;
-        overflow: hidden; /* Importante */
-    }
-    
-    .modal-body-grid {
-    display: block;
-    flex: 1; /* Ocupa todo el espacio restante */
-    overflow-y: auto; /* SCROLL AQUI */
-    padding-bottom: 40px; /* Espacio extra al final para scroll cómodo */
+        background: var(--bg-card);
+        position: relative;
+        overflow: hidden; /* Mantiene los bordes redondeados */
     }
 
-    .team-photo-compact {
-    height: 150px; /* Controlar la altura de la foto */
-    margin-bottom: 20px;
-}
-    .team-identity-col { margin-bottom: 20px; }
-    .modal-logo-circle { width: 80px; height: 80px; margin-top: -40px; }
-    .team-photo-compact { height: 140px; } /* Foto aún más chica en móvil */
-    
-    .team-squad-col {
-        height: auto; /* Altura automática */
-        overflow: visible; 
-    }
-    .scrollable-table-wrapper { overflow: visible; }
-}
-
-
-/* =========================
-   RESPONSIVE MOBILE (Estilo Bottom Sheet)
-========================= */
-@media (max-width: 768px) {
-    /* 1. Contenedor del Modal: Pegado abajo */
-    .modal {
-        align-items: flex-end; /* Alinea el modal al fondo de la pantalla */
-        padding: 0;
-    }
-
-    .modal-content { 
-        width: 100%; 
-        max-width: 100%; 
-        height: 85vh; /* Ocupa el 85% de la altura de la pantalla */
-        border-radius: 25px 25px 0 0; /* Solo redondeamos arriba */
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    /* El banner superior se queda fijo arriba */
     .modal-header-strip {
-        flex-shrink: 0; /* Evita que el banner se achique */
-        height: 50px; /* Un poco más fino en móvil */
+        height: 160px; /* Altura fija */
+        width: 100%;
+        flex-shrink: 0; /* IMPORTANTE: No dejar que se achique */
+        position: relative;
+        z-index: 1;
     }
 
-    /* Botón cerrar más grande y accesible */
     .close-modal {
-        top: 10px;
+        position: fixed; /* Fijo respecto a la pantalla */
+        top: 20px;
         right: 20px;
-        font-size: 32px;
-        background: rgba(0,0,0,0.5); /* Fondo semitransparente para contraste */
-        width: 40px; height: 40px;
+        background: rgba(0, 0, 0, 0.6);
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        padding-bottom: 4px; /* Ajuste visual del caracter x */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000; /* Por encima de todo */
+        color: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
-
-    /* 2. Cuerpo del Modal: Scroll Vertical Unificado */
+    
     .modal-body-grid {
         display: flex;
         flex-direction: column;
-        grid-template-columns: 1fr; /* Una sola columna */
-        overflow-y: auto; /* El scroll ocurre AQUI para todo el contenido */
-        padding: 0 20px 40px 20px; /* Padding inferior extra para scroll cómodo */
-        gap: 20px;
-        height: 100%;
+        overflow-y: auto; /* El scroll ocurre SOLO dentro de este div */
+        flex: 1; /* Ocupa todo el espacio restante hasta abajo */
+        padding: 0 20px 40px 20px; /* Padding extra abajo para scroll cómodo */
+        gap: 15px;
     }
 
-    /* 3. Columna de Identidad (Logo, Nombre, Foto) */
     .team-identity-col {
-        margin-bottom: 0;
-        padding-top: 0; /* Quitamos el padding de escritorio */
+        margin-top: -50px; /* Sube sobre el banner */
+        padding-top: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        /* Truco visual: subimos el logo para que pise el banner */
-        margin-top: -35px; 
+        position: relative;
+        z-index: 10; 
+        flex-shrink: 0; /* Evita deformaciones */
     }
 
-    .modal-logo-circle { 
-        width: 80px; 
-        height: 80px; 
-        margin-top: 0;
+    .modal-logo-circle {
+        width: 90px; /* Un poco más chico para que no choque arriba */
+        height: 90px;
+        background: var(--bg-card);
+        border: 3px solid var(--sas-blue);
+        border-radius: 50%;
+        padding: 5px;
+        object-fit: contain;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         margin-bottom: 10px;
-        background-color: var(--bg-card); /* Importante para tapar el banner */
+        /* Asegura que no se corte */
+        position: relative; 
     }
 
     .modal-team-name {
-        font-size: 1.5rem; /* Texto un poco más chico para que no rompa líneas */
+        font-size: 1.5rem; /* Texto un poco más chico para ahorrar espacio */
         margin-bottom: 15px;
+        text-align: center;
     }
 
-    /* 4. FOTO DEL EQUIPO COMPRIMIDA (Tu requerimiento principal) */
-    .team-photo-compact { 
-        height: 130px; /* Altura fija pequeña, tipo "postal" */
+    .team-photo-compact {
         width: 100%;
+        height: auto;
         border-radius: 12px;
+        overflow: hidden;
         margin-bottom: 10px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-    
-    /* 5. Lista de Jugadores (Se expande completa) */
-    .team-squad-col {
-        height: auto; /* Altura automática, crece según la cantidad de jugadores */
-        overflow: visible; /* Quitamos el scroll interno */
-        background: rgba(255, 255, 255, 0.03); /* Fondo más sutil */
-        margin-bottom: 20px;
+        border: 1px solid rgba(255,255,255,0.1);
+        display: flex;
+        justify-content: center;
+        background: #000;
     }
 
-    .scrollable-table-wrapper { 
-        overflow: visible; /* Permite ver toda la tabla */
-        height: auto;
+    .team-photo-compact img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Muestra toda la foto sin cortar cabezas */
+    }
+
+    .team-squad-col {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        padding: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        margin-bottom: 20px;
+        flex-shrink: 0; /* Asegura que se renderice completa */
     }
     
-    /* Ajustes de la tabla para móvil */
-    .players-table td {
-        padding: 12px 10px; /* Más espacio para dedos */
-        font-size: 0.9rem;
-    }
 }
 
 
@@ -1412,122 +1403,5 @@ tr:nth-child(2) td:first-child {
     }
 }
 
-/* --- REDISEÑO DEL MODAL EN MÓVIL (Estilo Perfil Moderno) --- */
-@media (max-width: 768px) {
 
-    /* 1. La ventana emergente (Bottom Sheet) */
-    .modal {
-        align-items: flex-end; /* Pegado abajo */
-    }
-    
-    .modal-content {
-        height: 85vh; /* Ocupa casi toda la altura */
-        border-radius: 20px 20px 0 0; /* Redondeado solo arriba */
-        overflow: hidden; /* Corta lo que sobre */
-        display: flex;
-        flex-direction: column;
-        background: #020617; /* Fondo oscuro sólido */
-    }
 
-    /* 2. Banner Superior */
-    .modal-header-strip {
-        height: 80px; /* Altura fija para el banner */
-        flex-shrink: 0;
-        position: relative;
-    }
-
-    /* Botón cerrar más visible */
-    .close-modal {
-        top: 15px;
-        right: 15px;
-        background: rgba(0,0,0,0.6); /* Fondo negro semitransparente */
-        color: white;
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        padding-bottom: 4px; /* Ajuste visual */
-        z-index: 200;
-    }
-
-    /* 3. Cuerpo con Scroll */
-    .modal-body-grid {
-        display: block; /* Bloque simple, no grid */
-        overflow-y: auto; /* Scroll aquí */
-        padding: 0; /* Quitamos padding general para que el banner toque bordes */
-        height: 100%;
-    }
-
-    /* 4. Cabecera del Equipo (Logo y Nombre) */
-    .team-identity-col {
-        margin-top: -40px; /* Subimos para pisar el banner */
-        padding: 0 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-        position: relative;
-        z-index: 10;
-    }
-
-    /* Logo centrado y limpio */
-    .modal-logo-circle {
-        width: 80px;
-        height: 80px;
-        background: #020617; /* Mismo color que fondo modal para "recortar" */
-        border: 2px solid var(--sas-blue);
-        margin: 0;
-        margin-bottom: 10px;
-        padding: 5px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    }
-
-    .modal-team-name {
-        font-size: 1.6rem;
-        text-align: center;
-        margin-bottom: 15px;
-    }
-
-    /* 5. FOTO DEL EQUIPO (Arreglo principal) */
-    .team-photo-compact {
-        width: 100%; /* Ancho total del contenedor */
-        height: auto; /* Altura automática según la imagen */
-        max-height: 200px; /* Límite para que no sea gigante */
-        margin-bottom: 20px;
-        border: none; /* Quitamos bordes raros */
-        background: transparent;
-        box-shadow: none;
-        border-radius: 12px;
-        overflow: hidden;
-    }
-
-    .team-photo-compact img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Llena el espacio y se ve bien */
-        display: block;
-    }
-
-    /* 6. Lista de Jugadores (Tabla) */
-    .team-squad-col {
-        margin: 0 20px 40px 20px; /* Margen a los lados y abajo */
-        background: rgba(255, 255, 255, 0.03);
-        border-radius: 12px;
-        padding: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .squad-title {
-        color: var(--sas-green);
-        text-align: left;
-        margin-bottom: 10px;
-    }
-
-    .players-table td {
-        padding: 12px 10px;
-        font-size: 0.9rem;
-    }
-}
