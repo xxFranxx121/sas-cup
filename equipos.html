@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipos | SAS CUP</title>
+    <title>Equipos y Planteles | SAS CUP 2025</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+
+    <link rel="icon" type="image/png" href="imagenes/sascup2025.png">
+    
+    <link rel="apple-touch-icon" href="imagenes/sascup2025.png">
+    
+    <meta name="theme-color" content="#020617">
+    
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
 
@@ -131,18 +139,18 @@ const teamData = {
         banner: 'imagenes/banderas/bandera-cacn.PNG', // Tu nueva imagen de bandera
         photo: 'imagenes/fotos-equipos/plantel-cacn.png', // Tu nueva foto del equipo
         players: [
-            { name: 'Francico De Cilia', pos: 'A confirmar' },
-            { name: 'Santiago Tahhan', pos: 'A confirmar' },
-            { name: 'Alejo Reynoso', pos: 'A confirmar' },
-            { name: 'Mateo Vuigner', pos: 'A confirmar' },
-            { name: 'Gonzalo Orellana', pos: 'A confirmar' },
-            { name: 'Nicolas Barrionuevo', pos: 'A confirmar' },
-            { name: 'Massimo Macchiarola', pos: 'A confirmar' },
-            { name: 'Benjamin Castiglione', pos: 'A confirmar' },
-            { name: 'Juan Repolles', pos: 'A confirmar' },
-            { name: 'Maximo Fernandez Rozze', pos: 'A confirmar' },
-            { name: 'Nacho Ayunta', pos: 'A confirmar' },
-            { name: 'Leonel Pereyra', pos: 'A confirmar' },
+            { name: 'Santiago Tahhan', pos: 'Defensor', number: '27'},
+            { name: 'Francisco De Cilia', pos: 'Defensor', number: '9' },
+            { name: 'Alejo Reynoso', pos: 'Mediocampista', number: '14' },
+            { name: 'Mateo Vuigner', pos: 'Mediocampista' , number: '5'},
+            { name: 'Gonzalo Orellana', pos: 'Arquero', number: '' },
+            { name: 'Nicolas Barrionuevo', pos: 'Defensor', number: '' },
+            { name: 'Massimo Macchiarola', pos: 'Defensor' , number: '8'},
+            { name: 'Benjamin Castiglione', pos: 'Delantero' , number: ''},
+            { name: 'Juan Repolles', pos: 'Delantero' , number: '7'},
+            { name: 'Maximo Fernandez Rozze', pos: 'Defensor' , number: '2'},
+            { name: 'Nacho Ayunta', pos: 'Defensor', number: '' },
+            { name: 'Leonel Pereyra', pos: 'Mediocampista' , number: '10'},
 
         ]
     },
@@ -250,8 +258,11 @@ function openTeam(teamId) {
     const list = document.getElementById('modalPlayersList');
     list.innerHTML = team.players.map(p => `
         <tr>
-            <td>${p.name}</td>
-            <td>${p.pos}</td>
+            <td class="player-number">${p.number || '-'}</td>
+            
+            <td class="player-name">${p.name}</td>
+            
+            <td class="player-pos">${p.pos}</td>
         </tr>
     `).join('');
 

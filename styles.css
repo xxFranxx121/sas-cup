@@ -481,7 +481,22 @@ nav a:hover {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+/* 1. Estilo para la columna del NÚMERO */
+.player-number {
+    width: 40px;            /* Ancho fijo para que no bailen */
+    text-align: center;     /* Número centrado */
+    font-weight: 900;       /* Gordito */
+    color: var(--sas-blue); /* Color azul (o el que gustes) */
+    font-family: monospace; /* Fuente tipo "digital" o técnica queda bien */
+    font-size: 1rem;
+}
 
+/* 2. Ajuste para la columna de POSICIÓN (Alineada a la derecha) */
+.player-pos {
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+}
 .player-name { 
     font-size: 0.9rem; 
     color: var(--text-light); /* Texto más blanco para que resalte */
@@ -531,10 +546,28 @@ td {
     color: var(--text-light);
 }
 
-/* Color especial para el primer lugar */
-tr:nth-child(2) td:first-child {
+.players-table tr:nth-child(1) td:nth-child(2) {
     color: var(--sas-green);
-    font-weight: bold;
+    font-weight: 900;
+    display: flex; 
+    align-items: center;
+}
+
+/* La cinta de capitán */
+.players-table tr:nth-child(1) td:nth-child(2)::after {
+    content: "C";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFD700;
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: 900;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    margin-left: 10px;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
 }
 
 /* --- RESPONSIVE --- */
@@ -1163,6 +1196,7 @@ tr:nth-child(2) td:first-child {
     height: 100%;
     object-fit: contain; /* Recorta la imagen para llenar el espacio sin deformar */
     transition: transform 0.5s;
+    background: url("imagenes/fondo equipos.png") center / cover no-repeat;
 }
 
 .team-photo-compact:hover img {
@@ -1306,7 +1340,7 @@ tr:nth-child(2) td:first-child {
         border: 1px solid rgba(255,255,255,0.1);
         display: flex;
         justify-content: center;
-        background: #000;
+        background: url("imagenes/fondo equipos.png") center / cover no-repeat;
     }
 
     .team-photo-compact img {
@@ -1405,3 +1439,160 @@ tr:nth-child(2) td:first-child {
 
 
 
+/* --- ESTILO SEDE (Estilo Instagram Story) --- */
+.venue-card {
+    /* Fondo oscuro con un toque de degradado neón sutil (Rojo a Verde) */
+    background: linear-gradient(135deg, rgba(225, 29, 72, 0.15) 0%, var(--bg-card) 40%, var(--bg-card) 60%, rgba(16, 185, 129, 0.15) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Icono de ubicación */
+.venue-icon {
+    width: 50px;
+    height: 50px;
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+}
+
+/* "COMPLEJO DEPORTIVO" */
+.venue-subtitle {
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1;
+}
+
+/* "LAS CHAPAS" */
+.venue-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: white;
+    margin: 0 0 20px 0;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    line-height: 1;
+}
+
+/* Contenedor del Mapa */
+.map-wrapper {
+    width: 100%;
+    max-width: 600px; /* Que no sea gigante en PC */
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin: 10px 0;
+    background: #000;
+}
+
+.map-wrapper iframe {
+    width: 100%;
+    height: 350px; /* Altura cómoda */
+    display: block;
+}
+
+/* Dirección abajo */
+.venue-address {
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-top: 10px;
+    letter-spacing: 1px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--sas-blue); /* Detalle de diseño */
+}
+
+.venue-label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    font-weight: 700;
+}
+
+/* Ajuste Móvil */
+@media (max-width: 768px) {
+    .venue-title { font-size: 2rem; }
+    .map-wrapper iframe { height: 250px; }
+}
+
+
+/* --- TARJETA GALERÍA --- */
+.gallery-card {
+    /* Fondo con imagen oscurecida o un gradiente elegante */
+    background: linear-gradient(to right, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.6)), url('imagenes/fondo-cancha.jpg'); /* Si tienes una foto de fondo, ponla aquí */
+    background-size: cover;
+    background-position: center;
+    padding: 30px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.gallery-content h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.gallery-content p {
+    margin: 5px 0 0 0;
+    color: var(--text-dim);
+    font-size: 1rem;
+}
+
+.gallery-btn {
+    background: white;
+    color: var(--bg-deep); /* Texto oscuro */
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.gallery-btn:hover {
+    background: var(--sas-green); /* Se pone verde al pasar el mouse */
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .gallery-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 25px;
+    }
+    .gallery-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

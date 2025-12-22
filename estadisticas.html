@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estadísticas | SAS CUP</title>
     <link rel="stylesheet" href="styles.css">
+
+    <link rel="icon" type="image/png" href="imagenes/sascup2025.png">
+    
+    <link rel="apple-touch-icon" href="imagenes/sascup2025.png">
+    
+    <meta name="theme-color" content="#020617">
+    
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
 
@@ -31,18 +39,19 @@
     <!-- FILTROS -->
     <div class="stats-filters">
         <button class="filter active" data-fecha="total">Total</button>
-        <button class="filter" data-fecha="f1">Fecha 1</button>
-        <button class="filter" data-fecha="f2">Fecha 2</button>
+        <button class="filter" data-fecha="f1">Repechaje</button>
+        <button class="filter" data-fecha="f2">Semifinales</button>
+        <button class="filter" data-fecha="f3">Final</button>
     </div>
 
     <!-- MVP -->
     <div class="card mvp-mini" id="mvp">
         <div>
             <h3>MVP</h3>
-            <p class="mvp-name">Lucho</p>
-            <span class="mvp-team">CACN FC</span>
+            <p class="mvp-name">Proximamente</p>
+            <span class="mvp-team">EQUIPO FC</span>
         </div>
-        <img src="imagenes/mvp.jpg" alt="MVP">
+        <img src="imagenes/coming soon.png"  alt="MVP">
     </div>
 
     <!-- TABLA GOLES -->
@@ -53,31 +62,41 @@
                 <tr><th>#</th><th>Jugador</th><th>Equipo</th><th>Goles</th></tr>
             </thead>
             <tbody>
-                <tr class="gold"><td>1</td><td>Mateo Vuigner</td><td>CACN</td><td>12</td></tr>
-                <tr class="silver"><td>2</td><td>Lucho</td><td>Hermas</td><td>9</td></tr>
-                <tr class="bronze"><td>3</td><td>Juan Pérez</td><td>Llorvi</td><td>7</td></tr>
+                <tr class="gold"><td>1</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
+                <tr class="silver"><td>2</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
+                <tr class="bronze"><td>3</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
             </tbody>
         </table>
     </div>
 
     <!-- FECHA 1 -->
     <div class="card stats-block" data-fecha="f1">
-        <div class="card-header"><h3>Goleadores – Fecha 1</h3></div>
+        <div class="card-header"><h3>Goleadores – Repechaje</h3></div>
         <table class="stats-table">
             <tbody>
-                <tr class="gold"><td>1</td><td>Lucho</td><td>CACN</td><td>3</td></tr>
-                <tr><td>2</td><td>Mateo Vuigner</td><td>CACN</td><td>2</td></tr>
+                <tr class="gold"><td>1</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
+                <tr><td>2</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
             </tbody>
         </table>
     </div>
 
     <!-- FECHA 2 -->
     <div class="card stats-block" data-fecha="f2">
-        <div class="card-header"><h3>Goleadores – Fecha 2</h3></div>
+        <div class="card-header"><h3>Goleadores – Semifinales</h3></div>
         <table class="stats-table">
             <tbody>
-                <tr class="gold"><td>1</td><td>Mateo Vuigner</td><td>CACN</td><td>4</td></tr>
-                <tr><td>2</td><td>Juan Pérez</td><td>Llorvi</td><td>2</td></tr>
+                <tr class="gold"><td>1</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
+                <tr><td>2</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- FECHA 3 -->
+    <div class="card stats-block" data-fecha="f3">
+        <div class="card-header"><h3>Goleadores – Final</h3></div>
+        <table class="stats-table">
+            <tbody>
+                <tr class="gold"><td>1</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
+                <tr><td>2</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
             </tbody>
         </table>
     </div>
@@ -99,21 +118,21 @@
         <tbody>
             <tr class="gold">
                 <td>1</td>
-                <td>Fran De Cilia</td>
-                <td>CACN</td>
-                <td>8</td>
+                <td>Proximamente</td>
+                <td>EQUIPO FC</td>
+                <td>X</td>
             </tr>
             <tr>
                 <td>2</td>
-                <td>Lucas Gómez</td>
-                <td>Explosivos</td>
-                <td>6</td>
+                <td>Proximamente</td>
+                <td>EQUIPO FC</td>
+                <td>X</td>
             </tr>
             <tr>
                 <td>3</td>
-                <td>Juan Pérez</td>
-                <td>Llorvi</td>
-                <td>5</td>
+                <td>Proximamente</td>
+                <td>EQUIPO FC</td>
+                <td>X</td>
             </tr>
         </tbody>
     </table>
@@ -138,30 +157,70 @@
             <tr class="gold">
                 <td>Arquero CACN</td>
                 <td>CACN</td>
-                <td>4</td>
-                <td>1</td>
-                <td>0</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
             </tr>
             <tr>
                 <td>Arquero Hermas</td>
                 <td>Hermas</td>
-                <td>2</td>
-                <td>2</td>
-                <td>1</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+            </tr>
+            <tr>
+                <td>Arquero Llorvi</td>
+                <td>Llorvi</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+            </tr>
+            <tr>
+                <td>Arquero Semen Up</td>
+                <td>Semen Up</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
+            </tr>
+            <tr>
+                <td>Arquero Explosivos</td>
+                <td>Los Explosivos</td>
+                <td>X</td>
+                <td>X</td>
+                <td>X</td>
             </tr>
         </tbody>
     </table>
 </div>
 
 <div class="card stats-block" data-fecha="f1">
-    <div class="card-header"><h3>Asistencias – Fecha 1</h3></div>
+    <div class="card-header"><h3>Asistencias – Repechaje</h3></div>
         <table class="stats-table">
             <tbody>
-                <tr class="gold"><td>1</td><td>Francisco de Cilia</td><td>CACN</td><td>4</td></tr>
-                <tr><td>2</td><td>Juan Pérez</td><td>Llorvi</td><td>2</td></tr>
+                <tr class="gold"><td>1</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
+                <tr><td>2</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
             </tbody>
         </table>
-    ...
+</div>
+
+<div class="card stats-block" data-fecha="f2">
+    <div class="card-header"><h3>Asistencias – Semifinales</h3></div>
+        <table class="stats-table">
+            <tbody>
+                <tr class="gold"><td>1</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
+                <tr><td>2</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
+            </tbody>
+        </table>
+</div>
+
+<div class="card stats-block" data-fecha="f3">
+    <div class="card-header"><h3>Asistencias – Final</h3></div>
+        <table class="stats-table">
+            <tbody>
+                <tr class="gold"><td>1</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
+                <tr><td>2</td><td>Proximamente</td><td>EQUIPO FC</td><td>X</td></tr>
+            </tbody>
+        </table>
 </div>
 
 
