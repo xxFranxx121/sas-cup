@@ -31,8 +31,10 @@ body {
     /* Fondo con un sutil efecto "aurora" como en el logo */
     background: radial-gradient(circle at 50% 0%, #1e293b 0%, var(--bg-deep) 100%);
     color: var(--text-light);
-    padding-bottom: 50px;
+    padding-bottom: 0px;
     min-height: 100vh;
+    display: flex;             /* 1. Convertimos el cuerpo en una caja flexible */
+    flex-direction: column;
     overflow-x: hidden; /* IMPORTANTE: Evita que la pantalla se mueva a los costados */
     width: 100%;
     position: relative;
@@ -194,6 +196,9 @@ nav a:hover {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 25px;
+
+    flex: 1;      /* Empuja el footer hacia abajo si sobra espacio */
+    width: 100%;
 }
 /* --- AJUSTES PARA MÓVIL (Solo pantallas pequeñas) --- */
 @media (max-width: 480px) {
@@ -1596,3 +1601,66 @@ td {
         justify-content: center;
     }
 }
+
+
+/* --- FOOTER / PIE DE PÁGINA --- */
+footer {
+    background: var(--bg-deep); /* El mismo fondo oscuro de la web */
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    margin-top: 50px; /* Separación del contenido de arriba */
+}
+
+/* Línea decorativa arriba del footer */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--sas-blue), transparent);
+    opacity: 0.5;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.copyright {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.copyright strong {
+    color: var(--text-light);
+}
+
+/* Estilo para tu firma (Bien chiquito y sutil) */
+.developer {
+    font-size: 0.75rem; /* Letra pequeña */
+    color: rgba(255, 255, 255, 0.3); /* Color muy apagado para no molestar */
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Tu nombre resalta un poquito al pasar el mouse */
+.dev-name {
+    font-weight: 700;
+    transition: color 0.3s ease;
+    cursor: default;
+}
+
+.footer-content:hover .dev-name {
+    color: var(--sas-green); /* Se ilumina cuando el usuario baja hasta el fondo */
+    opacity: 1;
+}
+
+
+
