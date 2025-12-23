@@ -307,60 +307,75 @@ nav a:hover {
     font-weight: 700;
 }
 
-/* --- LISTA DE PARTIDOS (Escritorio) --- */
+/* --- LISTA DE PARTIDOS --- */
 .match-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 15px 10px; /* Reduje un poco el padding lateral */
     border-bottom: 1px solid rgba(255,255,255,0.05);
+    gap: 10px; /* Espacio mínimo entre columnas */
 }
 
 .team-info {
     display: flex;
     align-items: center;
-    gap: 12px;
-    flex: 1; /* Distribuye el espacio equitativamente */
+    gap: 5px; /* Menos espacio entre logo y texto */
+    flex: 1; 
+    min-width: 0; /* IMPORTANTE: Evita que el texto empuje y se monte al centro */
     font-weight: 700;
     font-size: 0.85rem;
 }
 
-/* Equipo IZQUIERDA: Escudo siempre pegado al borde IZQUIERDO */
+/* Ajuste específico para que los logos no sean gigantes en la lista */
+.match-item .team-logo {
+    width: 45px;  /* Reducido de 60px para dar espacio al texto */
+    height: 45px;
+    padding: 2px;
+    flex-shrink: 0; /* Asegura que el logo no se aplaste */
+}
+
+/* Alineación Izquierda */
 .match-item > .team-info:first-child {
     justify-content: flex-start; 
     text-align: left;
 }
 
-/* Equipo DERECHA: Escudo siempre pegado al borde DERECHO */
+/* Alineación Derecha */
 .match-item > .team-info:last-child {
-    /* flex-start en row-reverse pega el contenido al inicio del flujo (la derecha) */
     justify-content: flex-start; 
     flex-direction: row-reverse; 
     text-align: right;
 }
 
+/* El texto del nombre del equipo */
+.team-info span {
+    white-space: normal;  /* PERMITE que el texto baje de renglón */
+    overflow: visible;    /* Muestra todo el texto */
+    text-overflow: clip;  /* Quita los tres puntos (...) */
+    line-height: 1.1;     /* Junta un poco las líneas para que se lea mejor */
+    display: block;       /* Asegura que el texto ocupe su caja */
+    width: 100%;          /* Usa el ancho disponible */
+}
+
+/* Asegura que el equipo de la DERECHA alinee el texto hacia su escudo */
+.match-item > .team-info:last-child span {
+    text-align: right;
+}
+
+/* El centro (VS o Resultado) */
 .team-vs {
-    width: 50px; /* Ancho fijo para que el centro nunca se mueva */
-    font-weight: 900;
-    font-size: 0.75rem;
+    min-width: auto; /* Quitamos el ancho fijo grande */
+    margin: 0 5px;  /* Margen seguro a los costados */
+    flex-shrink: 0;  /* CLAVE: Esto impide que los equipos aplasten el resultado */
+    
+    font-weight: 800;
+    font-size: 1rem;
     color: var(--sas-red);
     text-align: center;
-    flex-shrink: 0;
-}
-
-/* --- GRID DERECHA --- */
-.right-grid {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    justify-content: flex-start; /* Alinea todo hacia arriba */
-}
-
-/* Nuevo contenedor para poner las stats una al lado de la otra */
-.stats-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 50% y 50% */
-    gap: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Ajuste para móviles: que las stats se apilen también */
@@ -1661,6 +1676,4 @@ footer::before {
     color: var(--sas-green); /* Se ilumina cuando el usuario baja hasta el fondo */
     opacity: 1;
 }
-
-
 
