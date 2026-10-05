@@ -7,7 +7,7 @@
  * Mientras esté vacía, el formulario funciona en "modo prueba":
  * simula el envío sin guardar nada.
  */
-const SCRIPT_URL = "";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwIodwtH7w1GiVONbhghp9JVp7RqxBY2rUjpMvfnm39cz2JdA8bsf9fT0U5hb5UuT1t/exec";
 
 const ORG_WHATSAPP = "5493854999100";
 

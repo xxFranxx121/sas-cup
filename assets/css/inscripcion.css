@@ -646,8 +646,8 @@ a {
     padding-left: 44px !important;
 }
 
-.input-prefix span:not(:only-child)+input {
-    padding-left: 44px;
+#field-whatsapp {
+    padding-left: 56px !important;
 }
 
 .field__hint {
