@@ -198,13 +198,7 @@ a {
 }
 
 .eyebrow::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--ok);
-    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
-    animation: pulse 2s infinite;
+    display: none;
 }
 
 .hero__title {
@@ -213,10 +207,7 @@ a {
     font-size: clamp(2rem, 5vw, 3.4rem);
     line-height: 1.02;
     letter-spacing: -0.02em;
-    background: linear-gradient(180deg, #ffffff 30%, var(--silver) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--text);
 }
 
 .hero__meta {
@@ -292,10 +283,7 @@ a {
     font-weight: 900;
     font-size: 1.7rem;
     line-height: 1;
-    background: var(--grad);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--cyan);
 }
 
 .stat__label {
@@ -326,10 +314,7 @@ a {
 }
 
 .price__row--accent strong {
-    background: var(--grad);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--cyan);
 }
 
 .price__note {
@@ -570,11 +555,10 @@ a {
     place-items: center;
     width: 28px;
     height: 28px;
-    border-radius: 9px;
-    background: var(--grad);
+    border-radius: 50%;
+    background: var(--faint);
     font-size: 0.85rem;
     color: #fff;
-    box-shadow: 0 6px 18px -4px rgba(29, 107, 255, 0.7);
 }
 
 .block__lead {
