@@ -1112,6 +1112,73 @@ a {
     color: var(--text);
 }
 
+/* ---------- Sponsor (McDonald's) ---------- */
+.sponsor {
+    --mc-red: #e8202a;
+    --mc-gold: #ffc72c;
+}
+
+.sponsor img {
+    display: block;
+}
+
+.sponsor--seal {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    padding: 6px 18px 6px 6px;
+    border-radius: 999px;
+    background: var(--glass);
+    box-shadow: 0 0 0 1px rgba(255, 199, 44, 0.28) inset, 0 10px 30px -12px rgba(232, 32, 42, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sponsor--seal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px rgba(255, 199, 44, 0.5) inset, 0 14px 36px -10px rgba(232, 32, 42, 0.7);
+}
+
+.sponsor-seal__logo {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--mc-red);
+    box-shadow: 0 0 0 2px rgba(255, 199, 44, 0.45);
+}
+
+.sponsor-seal__logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.25);
+}
+
+.sponsor-seal__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.sponsor-seal__text small {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mc-gold);
+}
+
+.sponsor-seal__text strong {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
 /* ---------- Footer ---------- */
 .footer {
     display: flex;
